@@ -9,12 +9,18 @@ object BuildPlugins {
     }
 }
 
+object Spring {
+
+    const val springStarterWeb = "org.springframework.boot:spring-boot-starter-web:${BuildPlugins.Versions.springBoot2}"
+
+}
+
 object Libraries {
     private object Versions {
         const val kalidation = "1.4.1"
         const val kotlinLogging = "1.7.6"
     }
-
+//    const val jacksonModuleKotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.}"
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     const val kalidation = "com.capraro:kalidation:${Versions.kalidation}"
     const val kotlinLogging = "io.github.microutils:kotlin-logging:${Versions.kotlinLogging}"
