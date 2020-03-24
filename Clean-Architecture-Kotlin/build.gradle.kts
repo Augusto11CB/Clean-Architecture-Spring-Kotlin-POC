@@ -1,17 +1,24 @@
-import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version kotlinVersion
-    kotlin("plugin.spring") version kotlinVersion
+    kotlin("plugin.spring") version kotlinVersion //TODO Verify Version "1.3.61"
     kotlin("plugin.allopen") version kotlinVersion
-    id("org.jetbrains.dokka") version BuildPlugins.Versions.dokka
-    id("com.adarshr.test-logger") version BuildPlugins.Versions.testLogger
+    kotlin("plugin.jpa") version kotlinVersion
+    kotlin("plugin.noarg") version kotlinVersion
+    /*
+
+    id("org.springframework.boot") version "2.2.5.RELEASE"
+	id("io.spring.dependency-management") version "1.0.9.RELEASE"
+
+    */
+
 }
 
 allprojects {
-    group = "com.capraro"
+    group = "spring.studies.clean.arch"
     version = "1.0.0-SNAPSHOT"
-    description = "Clean Arch / Spring boot sample"
+
 
     repositories {
         jcenter()
@@ -22,13 +29,14 @@ allprojects {
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "org.gradle.jacoco")
-    apply(plugin = "org.jetbrains.dokka")
 
-    tasks.withType<DokkaTask> {
-        outputFormat = "html"
-        outputDirectory = "$buildDir/doc"
-        includes = listOf("packages.md", "module.md")
+
+    //TODO - Implement in the builSrc module
+    val developmentOnly by configurations.creating
+    configurations {
+        runtimeClasspath {
+            extendsFrom(developmentOnly)
+        }
     }
 
     dependencies {
@@ -46,6 +54,7 @@ subprojects {
     }
 
     tasks {
+
         compileKotlin {
             kotlinOptions {
                 freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -61,7 +70,11 @@ subprojects {
         }
     }
 
-    tasks.test {
+    tasks.withType<Test> {
         useJUnitPlatform()
     }
+
+//    tasks.test {
+//        useJUnitPlatform()
+//    }
 }

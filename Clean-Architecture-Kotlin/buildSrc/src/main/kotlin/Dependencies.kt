@@ -1,12 +1,11 @@
-const val kotlinVersion = "1.3.50"
+const val kotlinVersion = "1.3.61"
 
 object BuildPlugins {
 
     object Versions {
-        const val springDependencyManagement = "1.0.8.RELEASE"
-        const val springBoot2 = "2.1.9.RELEASE"
-        const val dokka = "0.9.16"
-        const val testLogger = "2.0.0"
+        const val springDependencyManagement = "1.0.9.RELEASE"
+        const val springBoot2 = "2.2.5.RELEASE"
+
     }
 }
 

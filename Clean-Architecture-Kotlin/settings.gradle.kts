@@ -1,4 +1,3 @@
-
 rootProject.name = "Clean-Architecture-Kotlin"
 include("persistence")
 include("business")
